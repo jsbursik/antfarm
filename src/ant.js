@@ -1,26 +1,34 @@
 export class Ant {
-    h=10; w=10; color="#000000"; angle=0; speed=1;
+    h=5; w=5; color="#000000"; angle=0; speed=1;
     constructor(posX, posY){
         this.posX = posX;
         this.posY = posY;
+        this.angle = (Math.PI / 4) * randInt(0,7); // There are 8 directions an ant can go
     };
 
-    move(canvas) {
-        this.angle = (Math.PI / 4) * Math.floor((Math.random() * 9));
+    drawAnt(ctx) {
+        ctx.fillStyle = this.color;
+        ctx.fillRect(this.posX, this.posY, this.w, this.h);
+    }
+
+    move(canvas, ctx) {
+        let dirChange = randInt(-1,1);
+
+        dirChange == 0 ? this.dirChange : this.angle += ((Math.PI / 4) * dirChange);
 
         let cos = Math.cos(this.angle);
         let sin = Math.sin(this.angle);
 
         if(cos > 0){
-            this.posX = this.posX + 1 //this.w;
+            this.posX = this.posX + 1; //this.w;
         } else if(cos < 0){
-            this.posX = this.posX - 1 //this.w;
+            this.posX = this.posX - 1; //this.w;
         }
 
         if(sin > 0){
-            this.posY = this.posY - 1 //this.h;
+            this.posY = this.posY - 1; //this.h;
         } else if(sin < 0) {
-            this.posY = this.posY + 1 //this.h;
+            this.posY = this.posY + 1; //this.h;
         }
         
         this.posX < 0 ? this.posX = 0 : this.posX;
@@ -29,11 +37,11 @@ export class Ant {
         this.posY < 0 ? this.posY = 0 : this.posY;
         this.posY > canvas.height + this.h ? this.posY = canvas.height - this.h : this.posY;
 
-        // console.log(this.posX + ' ' + this.posY); // uncomment for position in console
+        this.drawAnt(ctx);
     }
 
-    drawAnt(ctx) {
-        ctx.fillStyle = this.color;
-        ctx.fillRect(this.posX, this.posY, this.w, this.h);
-    }
+}
+
+function randInt(min, max){
+    return Math.floor(Math.random() * (max - min + 1) + min);
 }

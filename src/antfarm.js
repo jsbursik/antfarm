@@ -29,16 +29,15 @@ function Draw() {
 
     c.save();
 
-    for(let i=0;i<ants.length;i++){
-        ants[i].move(canvas);
-        ants[i].drawAnt(c);
-    }
+    ants.forEach((curr, i, arr) => {
+        ants[i].move(canvas, c);
+    });
 
     window.requestAnimationFrame(Draw);
 }
 
 function randInt(min, max){
-    return Math.floor(Math.random() * max) + min;
+    return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 init();

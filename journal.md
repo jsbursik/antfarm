@@ -19,3 +19,17 @@ Ants seem to really love the right side of the screen, so I think my cos/sin "ha
 It seems at any given point an ant can only move in 8 given directions: The 4 cardinal directions and the 45 degrees between each of those (just because of how pixel grids work). **It would be nice**<sup>1</sup> to have the illusion of more than just those directions, for smooth turning at least.
 
 [1] This is probably going to get said too often.
+
+## Literally minutes later
+
+REQUIRE TURNING! Right now, ants are just selecting random angles everytime they move. If I just set them with an angle on creation, then part of their `move()` functionality is just choosing the direction to turn. I'm thinking ±45° (in radians of course) from the direction they are currently facing WITH the option of just staying straight on course.
+
+## Slighty later
+
+This has now been implemented, it makes it a bit less jittery. For now random movement is fine, but I would like it to seem like the ants are walking somewhere for a reason.
+
+At first, an ant should probably wander around but once it finds things maybe it should remember where they were? That way it could start path-forming. I'm choosing to use kinesis to drive the ant's behavior because I don't want them to just *know* where something is. I want them to first find it, realize it's good or bad, then *maybe* remember it for later? The memories of an ant would probably need to be very basic and short for performance reasons. Storing memories of 50-100 ants doesn't sound cheap, maybe it is?
+
+The movement system still feels like it can be massively simplified, but I think it's probably not worth working on it at this stage, especially if I need to do path-finding later or something to that effect, this will probably end up just getting gutted.
+
+I think the next focus is probably collission detection. I don't want ants to bump into eachother, and I want ants to stop walking off the canvas (that code seems to be broken for some reason).
