@@ -1,10 +1,7 @@
 import { Ant } from "./ant.js";
 
 const canvas = document.getElementById("canvas");
-var c = canvas.getContext("2d");
-
-// const h = window.innerHeight - 4;
-// const w = window.innerWidth;
+const c = canvas.getContext("2d");
 
 const h = 600;
 const w = 600;
@@ -12,18 +9,37 @@ const w = 600;
 canvas.height = h;
 canvas.width = w;
 
-const firstAnt = new Ant(0,0);
+const numAnts = 20;
+var ants = [];
 
-function drawAnt(ant) {
-    c.fillStyle = ant.color;
-    c.fillRect(ant.posX, ant.posY, 10, 10);
+function init() {
+    for(let i=0;i<numAnts;i++){
+        ants.push(new Ant(randInt(0,w-10),randInt(0,h-10)));
+    }
+
+    window.requestAnimationFrame(Draw);
 }
 
-function Draw(){
-    //c.clearRect(0,0, w, h); // Comment this out to see the path it follows.
-    drawAnt(firstAnt);
-    firstAnt.move(canvas);
+function Draw() {
+    c.globalCompositeOperation = 'destination-over'; // Still don't know what this does exactly.
+    c.clearRect(0, 0, w, h);
+
+    c.fillStyle = "#000000";
+    c.strokeStyle = "#000000";
+
+    c.save();
+
+    for(let i=0;i<ants.length;i++){
+        ants[i].move(canvas);
+        ants[i].drawAnt(c);
+    }
+
+    window.requestAnimationFrame(Draw);
 }
 
-setInterval(Draw, 100);
+function randInt(min, max){
+    return Math.floor(Math.random() * max) + min;
+}
+
+init();
     
