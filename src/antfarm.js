@@ -1,4 +1,4 @@
-import { Ant } from "./ant.js";
+import { Ants } from "./Ants.js";
 
 const canvas = document.getElementById("canvas");
 const c = canvas.getContext("2d");
@@ -10,12 +10,12 @@ canvas.height = h;
 canvas.width = w;
 
 const numAnts = 20;
-var ants = [];
+const ants = new Ants(numAnts, canvas, c);
 
 function init() {
-    for(let i=0;i<numAnts;i++){
-        ants.push(new Ant(randInt(0,w-10),randInt(0,h-10)));
-    }
+    // This is kind of empty now, the Ants class now does 99% of the setup in the constructor.
+    // Might use it later? Keeping for now.
+    ants.getIds();
 
     window.requestAnimationFrame(Draw);
 }
@@ -29,15 +29,10 @@ function Draw() {
 
     c.save();
 
-    ants.forEach((curr, i, arr) => {
-        ants[i].move(canvas, c);
-    });
+    ants.drawAnts();
+    
 
     window.requestAnimationFrame(Draw);
-}
-
-function randInt(min, max){
-    return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 init();
