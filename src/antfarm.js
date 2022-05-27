@@ -1,7 +1,7 @@
 import { Ants } from "./Ants.js";
 
 const canvas = document.getElementById("canvas");
-const c = canvas.getContext("2d");
+const ctx = canvas.getContext("2d");
 
 const h = 600;
 const w = 600;
@@ -10,7 +10,7 @@ canvas.height = h;
 canvas.width = w;
 
 const numAnts = 20;
-const ants = new Ants(numAnts, canvas, c);
+const ants = new Ants(numAnts, canvas, ctx);
 
 function init() {
     // This is kind of empty now, the Ants class now does 99% of the setup in the constructor.
@@ -21,17 +21,13 @@ function init() {
 }
 
 function Draw() {
-    c.globalCompositeOperation = 'destination-over'; // Still don't know what this does exactly.
-    c.clearRect(0, 0, w, h);
+    //c.globalCompositeOperation = 'destination-over'; // Still don't know what this does exactly.
+    ctx.clearRect(0, 0, w, h);
 
-    c.fillStyle = "#000000";
-    c.strokeStyle = "#000000";
-
-    c.save();
+    ctx.save();
 
     ants.drawAnts();
     
-
     window.requestAnimationFrame(Draw);
 }
 

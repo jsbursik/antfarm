@@ -50,12 +50,7 @@ class Ant {
         this.angle = (Math.PI / 4) * randInt(0,7); // There are 8 directions an ant can go
     };
 
-    drawAnt(ctx) {
-        ctx.fillStyle = this.color;
-        ctx.fillRect(this.posX, this.posY, this.w, this.h);
-    }
-
-    move(canvas, ctx) {
+    move(canvas, ctx){
         let dirChange = randInt(-1,1);
 
         dirChange == 0 ? this.dirChange : this.angle += ((Math.PI / 4) * dirChange);
@@ -81,7 +76,8 @@ class Ant {
         this.posY < 0 ? this.posY = 0 : this.posY;
         this.posY > canvas.height + this.h ? this.posY = canvas.height - this.h : this.posY;
 
-        this.drawAnt(ctx);
+        ctx.fillStyle = this.color;
+        ctx.fillRect(this.posX, this.posY, this.w, this.h);
     }
 
 }

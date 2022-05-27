@@ -1,4 +1,4 @@
-## 5/24/22
+# 5/24/22
 
 I finally got 1 ant to move. It's inefficient, I feel like there has to be a better way to turn any 45 degree (n * PI / 4) angle into movement. Also, yeah, javascript uses radians.
 
@@ -8,7 +8,7 @@ Ants need to exist in an array at some point. They need to dynamically grow (pus
 
 I added NodeJS/ExpressJS because CORS doesn't like me importing javascript and I wanted the Ant class to be separate. I seem to have forgotten how to just send files straight up using `req.path`, not sure what I was missing. Anyways, it's very much hacked together now.
 
-## 5/26/22
+# 5/26/22
 
 I reworked the drawing process. Instead of using `setInterval()` to call the draw command, I'm using `windows.requestAnimationFrame(callback)` to move forward. 
 
@@ -45,3 +45,7 @@ The main app has less clutter, the collection class can create and kill ants now
 All this, and I still don't know how to handle collisions. More-so I don't know how I should handle it **here**. My first thought is have all the ants move, then iterate through ant positions to check if 2 positions could overlap. Now that I'm thinking about how to do the check, I'll have to give that some thought too.
 
 I'm calling it here. I can't wrap my head around how I'm going to do collision stuff yet.
+
+# 5/27/22
+
+There seems to be an issue when letting it run for a while (maybe around 10 minutes or so?), and I've been removing bits of code to see it it helps. I think the next step will be removing the `.forEach()` methods from the Ants collection class. Why? Because maybe there's something about callback functions that I don't get when it comes to garbage collection/js life cycle. I just need to write out the `for` loops and see if it helps. 
