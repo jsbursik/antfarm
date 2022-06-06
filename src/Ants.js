@@ -12,27 +12,27 @@ export class Ants {
     }
 
     newAnt(){
-        this.ants.push(new Ant(randString(8), randInt(0,canvas.width), randInt(0,canvas.height)));
+        this.ants.push(new Ant(randString(8), randInt(0,this.canvas.width), randInt(0,this.canvas.height)));
     }
 
     killAnt(id){
-        this.ants.forEach((curr, i, arr)=>{
+        for(let i = 0; i < this.ants.length; i++){
             if(this.ants[i].id == id){
                 this.ants.splice(i, 1);
             }
-        });
+        }
     }
 
     drawAnts(){
-        this.ants.forEach((curr, i, arr)=>{
+        for(let i = 0; i < this.ants.length; i++){
             this.ants[i].move(this.canvas, this.ctx);
-        });
+        }
     }
 
     getIds(){
-        this.ants.forEach((curr, i, arr)=>{
+        for(let i = 0; i < this.ants.length; i++){
             console.log(this.ants[i].id);
-        });
+        }
     }
 
 }
@@ -42,12 +42,16 @@ export class Ants {
 //////////////////////////////////////////////////////////////////////////
 
 class Ant {
-    h=5; w=5; color="#000000"; angle=0; speed=1;
+    id; posX; posY; color; angle; speed; size;
+    minSize = 5; maxSize = 10;
     constructor(id, posX, posY){
         this.id = id;
         this.posX = posX;
         this.posY = posY;
         this.angle = (Math.PI / 4) * randInt(0,7); // There are 8 directions an ant can go
+        this.color = `rgb(${randInt(75,255)},${randInt(75,255)},${randInt(75,255)})`;
+        this.speed = 1;
+        this.size = randInt(this.minSize,this.maxSize);
     };
 
     move(canvas, ctx){
@@ -69,15 +73,9 @@ class Ant {
         } else if(sin < 0) {
             this.posY = this.posY + 1; //this.h;
         }
-        
-        this.posX < 0 ? this.posX = 0 : this.posX;
-        this.posX > canvas.width + this.w ? this.posX = canvas.width - this.w : this.posX;
-
-        this.posY < 0 ? this.posY = 0 : this.posY;
-        this.posY > canvas.height + this.h ? this.posY = canvas.height - this.h : this.posY;
 
         ctx.fillStyle = this.color;
-        ctx.fillRect(this.posX, this.posY, this.w, this.h);
+        ctx.fillRect(this.posX, this.posY, this.size, this.size);
     }
 
 }

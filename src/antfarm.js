@@ -21,7 +21,7 @@ function init() {
 }
 
 function Draw() {
-    //c.globalCompositeOperation = 'destination-over'; // Still don't know what this does exactly.
+    // ctx.globalCompositeOperation = 'destination-over'; // Still don't know what this does exactly.
     ctx.clearRect(0, 0, w, h);
 
     ctx.save();

@@ -49,3 +49,11 @@ I'm calling it here. I can't wrap my head around how I'm going to do collision s
 # 5/27/22
 
 There seems to be an issue when letting it run for a while (maybe around 10 minutes or so?), and I've been removing bits of code to see it it helps. I think the next step will be removing the `.forEach()` methods from the Ants collection class. Why? Because maybe there's something about callback functions that I don't get when it comes to garbage collection/js life cycle. I just need to write out the `for` loops and see if it helps. 
+
+# 6/6/22
+
+It's been a while since I've worked on the project, got busy with the other project. The first thing I think I want to tackle is to give the Ant class more attributes like hunger, energy, etc. I won't neccessarily ties these new attributes into th actions it takes, but I need it to be mapped out for the most part for when other systems need it.
+
+For Example: if I wanted to work on the movement system and see if I can get the ants to go to a "cooler" section of the canvas, I need them to have a temperature value to work with.
+
+Also just realized I have no idea how to make a "cooler" section of the canvas. Do I need to log all coordinates and what inhabits them..? Surely not. I know how I can get Ants to not collide with *each other* but now I just realized the collision detection might have to be *outside* the Ants class.
